@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Description
 
-## Getting Started
+This is an **Issue Tracker** built with **Next.js** and **TypeScript**, designed to help teams efficiently manage and track software issues, feature requests, and bug reports.
 
-First, run the development server:
+## Features
+
+- **Issue Management**: Create, edit, assign, and track issues with relevant metadata such as status and assignees.
+  
+- **Filtering & Sorting**: Easily filter and sort issues based on status and labels users for better organization.
+  
+- **User Authentication**: Secure login and authentication system using **NextAuth.js** to manage user permissions.
+
+- **Markdown Support**: Issues and comments support **Markdown formatting** for better readability and structuring.
+
+- **Responsive Design**: Fully responsive layout, optimized for both desktop and mobile devices.
+
+## Technologies Used
+
+- **Next.js**: A React framework for building fast and scalable applications with server-side rendering (SSR) and static site generation (SSG).
+
+- **TypeScript**: A strongly typed superset of JavaScript to improve code quality and maintainability.
+
+- **Prisma**: A modern database ORM for seamless interaction with databases like PostgreSQL and MySQL.
+
+- **NextAuth.js**: A robust authentication library to handle user authentication and session management.
+
+- **React Query**: A powerful data-fetching library for handling API requests, caching, and background updates efficiently.
+
+- **Tailwind CSS**: A utility-first CSS framework for rapid and responsive UI development.
+
+- **React Icons**: A collection of customizable icons for better UI representation.
+
+- Radix UI: A set of accessible, unstyled components for building high-quality UI experiences with flexibility and customization.
+
+- Sentry: A performance monitoring and error tracking tool that helps identify and fix application issues in real time.
+
+- NeonDB: A serverless, fully managed PostgreSQL database designed for modern web applications, offering high availability and scalability.
+
+## Installation
+
+Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone https://github.com/your-repo/issue-tracker.git
+$ cd issue-tracker
+$ npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running the App
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Start the development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+$ npm run dev
+```
 
-## Learn More
+## Set up your .env file
 
-To learn more about Next.js, take a look at the following resources:
+Before running the app, create a `.env.local` file in the root directory and configure the following environment variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+DATABASE_URL=your_database_url
+AUTH_SECRET=your_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+Once the app is running, open your browser and navigate to **http://localhost:3000** to start tracking issues effectively.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
