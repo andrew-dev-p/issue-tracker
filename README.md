@@ -30,11 +30,11 @@ This is an **Issue Tracker** built with **Next.js** and **TypeScript**, designed
 
 - **React Icons**: A collection of customizable icons for better UI representation.
 
-- Radix UI: A set of accessible, unstyled components for building high-quality UI experiences with flexibility and customization.
+- **Radix UI**: A set of accessible, unstyled components for building high-quality UI experiences with flexibility and customization.
 
-- Sentry: A performance monitoring and error tracking tool that helps identify and fix application issues in real time.
+- **Sentry**: A performance monitoring and error tracking tool that helps identify and fix application issues in real time.
 
-- NeonDB: A serverless, fully managed PostgreSQL database designed for modern web applications, offering high availability and scalability.
+- **NeonDB**: A serverless, fully managed PostgreSQL database designed for modern web applications, offering high availability and scalability.
 
 ## Installation
 
