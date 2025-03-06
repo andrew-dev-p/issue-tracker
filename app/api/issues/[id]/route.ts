@@ -3,11 +3,14 @@ import { auth } from "@/auth";
 import { prisma } from "@/prisma/client";
 import { NextResponse } from "next/server";
 
-export const PATCH = auth(async function (
-  request,
-  { params }: { params: { id: string } }
-) {
+export const PATCH = auth(async function (request) {
   if (!request.auth) return NextResponse.json({}, { status: 401 });
+
+  const url = new URL(request.url);
+  const id = url.pathname.split("/").pop();
+
+  if (!id)
+    return NextResponse.json({ error: "Invalid issue ID" }, { status: 400 });
 
   const body = await request.json();
 
@@ -17,11 +20,9 @@ export const PATCH = auth(async function (
 
   const { title, description, assignedToUserId } = body;
 
-  if (body.assignedToUserId) {
+  if (assignedToUserId) {
     const user = await prisma.user.findUnique({
-      where: {
-        id: assignedToUserId,
-      },
+      where: { id: assignedToUserId },
     });
 
     if (!user)
@@ -29,9 +30,7 @@ export const PATCH = auth(async function (
   }
 
   const issue = await prisma.issue.findUnique({
-    where: {
-      id: Number(params.id),
-    },
+    where: { id: Number(id) },
   });
 
   if (!issue)
@@ -45,16 +44,17 @@ export const PATCH = auth(async function (
   return NextResponse.json(updatedIssue);
 });
 
-export const DELETE = auth(async function (
-  request,
-  { params }: { params: { id: string } }
-) {
+export const DELETE = auth(async function (request) {
   if (!request.auth) return NextResponse.json({}, { status: 401 });
 
+  const url = new URL(request.url);
+  const id = url.pathname.split("/").pop();
+
+  if (!id)
+    return NextResponse.json({ error: "Invalid issue ID" }, { status: 400 });
+
   const issue = await prisma.issue.findUnique({
-    where: {
-      id: Number(params.id),
-    },
+    where: { id: Number(id) },
   });
 
   if (!issue)
