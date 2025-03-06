@@ -4,6 +4,7 @@ import { Issue, Status } from "@prisma/client";
 import Pagination from "../components/Pagination";
 import IssueActions from "./IssueActions";
 import IssueTable from "./IssueTable";
+import { Metadata } from "next";
 
 interface IssuesPageProps {
   searchParams: Promise<{ status: Status; orderBy: keyof Issue; page: string }>;
@@ -48,3 +49,8 @@ const IssuesPage: React.FC<IssuesPageProps> = async ({ searchParams }) => {
 };
 
 export default IssuesPage;
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issue List",
+  description: "View all project issues",
+};

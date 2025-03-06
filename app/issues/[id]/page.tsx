@@ -1,22 +1,27 @@
+import { auth } from "@/auth";
 import { prisma } from "@/prisma/client";
 import { Box, Flex, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
+import AssigneeSelect from "./AssigneeSelect";
+import DeleteIssueButton from "./DeleteIssueButton";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
-import DeleteIssueButton from "./DeleteIssueButton";
-import { auth } from "@/auth";
-import AssigneeSelect from "./AssigneeSelect";
+import { cache } from "react";
 
 interface IssueDetailPageProps {
   params: { id: string };
 }
 
+const fetchUser = cache((issueId: number) =>
+  prisma.issue.findUnique({
+    where: { id: issueId },
+  })
+);
+
 const IssueDetailPage: React.FC<IssueDetailPageProps> = async ({ params }) => {
   const session = await auth();
 
-  const issue = await prisma.issue.findUnique({
-    where: { id: Number(params.id) },
-  });
+  const issue = await fetchUser(Number(params.id));
 
   if (!issue) notFound();
 
@@ -39,3 +44,12 @@ const IssueDetailPage: React.FC<IssueDetailPageProps> = async ({ params }) => {
 };
 
 export default IssueDetailPage;
+
+export async function generateMetadata({ params }: IssueDetailPageProps) {
+  const issue = await fetchUser(Number(params.id));
+
+  return {
+    title: issue?.title,
+    description: `Details of issue ${issue?.id}`,
+  };
+}
