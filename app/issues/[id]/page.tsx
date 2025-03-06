@@ -8,20 +8,22 @@ import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
 import { cache } from "react";
 
-interface IssueDetailPageProps {
-  params: { id: string };
-}
-
 const fetchUser = cache((issueId: number) =>
   prisma.issue.findUnique({
     where: { id: issueId },
   })
 );
 
-const IssueDetailPage: React.FC<IssueDetailPageProps> = async ({ params }) => {
+const IssueDetailPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   const session = await auth();
 
-  const issue = await fetchUser(Number(params.id));
+  const { id } = await params;
+
+  const issue = await fetchUser(Number(id));
 
   if (!issue) notFound();
 
@@ -45,8 +47,14 @@ const IssueDetailPage: React.FC<IssueDetailPageProps> = async ({ params }) => {
 
 export default IssueDetailPage;
 
-export async function generateMetadata({ params }: IssueDetailPageProps) {
-  const issue = await fetchUser(Number(params.id));
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  const issue = await fetchUser(Number(id));
 
   return {
     title: issue?.title,
